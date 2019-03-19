@@ -1,52 +1,42 @@
 {
   "version": "0.0.0-development",
-  "name": "cz-customizable",
-  "description": "Commitizen customizable adapter following the conventional-changelog format.",
+  "name": "dagerikhl-cz-customizable-lab",
+  "description": "Commitizen customizable adapter semi-following the conventional-changelog format.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "eslint": "node_modules/eslint/bin/eslint.js *.js spec/**.js",
-    "test": "node_modules/jasmine-node/bin/jasmine-node spec/",
-    "test:coverage": "istanbul cover -x cz-config-EXAMPLE.js node_modules/jasmine-node/bin/jasmine-node spec/",
-    "test:check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "test:watch": "node_modules/jasmine-node/bin/jasmine-node --color --autotest spec/ --watch .",
-    "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "semantic-release": "semantic-release",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write '*.js' 'spec/**/*.js'",
-    "travis-deploy-once": "travis-deploy-once"
+    "lint": "eslint *.js",
+    "prettify": "prettier --single-quote --trailing-comma es5 --write '*.js' 'spec/**/*.js'",
+    "release": "semantic-release"
   },
-  "homepage": "https://github.com/leonardoanalista/cz-customizable",
+  "homepage": "https://github.com/dagerikhl/cz-customizable",
   "repository": {
     "type": "git",
-    "url": "https://github.com/leonardoanalista/cz-customizable.git"
+    "url": "https://github.com/dagerikhl/cz-customizable.git"
   },
-  "author": "Leonardo Correa <leonardoanalista@gmail.com>",
+  "author": "Dag Erik Løvgren <dagerikhl@gmail.com>",
   "contributors": [
+    "Leonardo Correa <leonardoanalista@gmail.com>",
     "Aleksey Guryanov <gurianov@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
     "editor": "1.0.0",
-    "find-config": "^1.0.0",
-    "inquirer": "^6.2.2",
-    "temp": "^0.9.0",
-    "word-wrap": "^1.2.3"
+    "find-config": "1.0.0",
+    "inquirer": "6.2.2",
+    "temp": "0.9.0",
+    "word-wrap": "1.2.3"
   },
   "devDependencies": {
-    "codecov.io": "0.1.6",
-    "commitizen": "^3.0.7",
-    "eslint": "^5.15.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "ghooks": "^2.0.4",
-    "istanbul": "^0.4.5",
-    "jasmine-node": "^1.16.2",
+    "commitizen": "3.0.7",
+    "eslint": "5.15.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-prettier": "3.0.1",
+    "ghooks": "2.0.4",
     "prettier": "1.16.4",
-    "rewire": "^4.0.1",
-    "semantic-release": "^15.13.3",
-    "travis-deploy-once": "^5.0.11"
+    "semantic-release": "15.13.3"
   },
   "config": {
     "commitizen": {
@@ -56,7 +46,11 @@
       "config": "cz-config-EXAMPLE.js"
     },
     "ghooks": {
-      "pre-commit": "npm run eslint && npm run test"
+      "pre-commit": "npm run lint"
     }
+  },
+  "release": {
+    "branch": "lab",
+    "ci": false
   }
 }
