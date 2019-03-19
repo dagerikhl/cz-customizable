@@ -1,4 +1,4 @@
-const buildCommit = require('./buildCommit');
+const { buildCommit, buildHead } = require('./buildCommit');
 const log = require('./logger');
 
 const isNotWip = answers => answers.type.toLowerCase() !== 'wip';
@@ -109,9 +109,9 @@ module.exports = {
         type: 'input',
         name: 'subject',
         message: messages.subject,
-        validate(value) {
+        validate(value, answers) {
           const limit = config.subjectLimit || 100;
-          if (value.length > limit) {
+          if (buildHead(answers, config, value).length > limit) {
             return `Exceed limit: ${limit}`;
           }
           return true;

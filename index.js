@@ -9,7 +9,7 @@ const temp = require('temp').track();
 const fs = require('fs');
 const path = require('path');
 const log = require('./logger');
-const buildCommit = require('./buildCommit');
+const { buildCommit } = require('./buildCommit');
 
 /* istanbul ignore next */
 function readConfigFile() {
