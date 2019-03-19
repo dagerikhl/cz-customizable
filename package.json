@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint *.js",
     "prettify": "prettier --single-quote --trailing-comma es5 --write '*.js' 'spec/**/*.js'",
-    "release": "semantic-release"
+    "release": "env-cmd .env semantic-release"
   },
   "homepage": "https://github.com/dagerikhl/cz-customizable",
   "repository": {
@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "commitizen": "3.0.7",
+    "env-cmd": "8.0.2",
     "eslint": "5.15.1",
     "eslint-config-airbnb-base": "13.1.0",
     "eslint-config-prettier": "4.1.0",
