@@ -18,6 +18,8 @@ const isValidateTicketNo = (value, config) => {
   return true;
 };
 
+const transformSubject = subject => subject.charAt(0).toLowerCase() + subject.slice(1);
+
 module.exports = {
   getQuestions(config, cz) {
     // normalize config optional options
@@ -65,8 +67,8 @@ module.exports = {
           if (config.allowCustomScopes || scopes.length === 0) {
             scopes = scopes.concat([
               new cz.Separator(),
-              { name: 'empty', value: false },
-              { name: 'custom', value: 'custom' },
+              { name: '¤ EMPTY', value: false },
+              { name: '¤ CUSTOM', value: 'custom' },
             ]);
           }
 
@@ -118,12 +120,14 @@ module.exports = {
           if (buildHead(answers, config, value).length > limit) {
             return `Exceed limit: ${limit}`;
           }
+          if (value[value.length - 1] === '.') {
+            return 'Subject cannot end with a period';
+          }
 
           return true;
         },
-        filter(value) {
-          return value.charAt(0).toLowerCase() + value.slice(1);
-        },
+        filter: transformSubject,
+        transformer: transformSubject,
       },
       {
         type: 'input',
