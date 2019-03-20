@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "scripts": {
     "lint": "eslint *.js",
-    "prettify": "prettier --single-quote --trailing-comma es5 --write '*.js' 'spec/**/*.js'",
+    "prettify": "prettier --single-quote --trailing-comma es5 --write '*.js'",
     "commit": "env-cmd .env git-cz",
     "release": "env-cmd .env semantic-release"
   },
