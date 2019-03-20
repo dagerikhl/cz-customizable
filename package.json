@@ -10,7 +10,7 @@
     "commit": "env-cmd .env git-cz",
     "release": "env-cmd .env semantic-release"
   },
-  "homepage": "https://github.com/dagerikhl/cz-customizable",
+  "homepage": "https://github.com/dagerikhl/cz-customizable/tree/lab",
   "repository": {
     "type": "git",
     "url": "https://github.com/dagerikhl/cz-customizable.git"
