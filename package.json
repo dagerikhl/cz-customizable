@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0-development",
+  "version": "5.6.0",
   "name": "dagerikhl-cz-customizable-lab",
   "description": "Commitizen customizable adapter semi-following the conventional-changelog format.",
   "main": "index.js",
