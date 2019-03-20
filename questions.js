@@ -71,11 +71,10 @@ module.exports = {
               new cz.Separator(),
               { name: '¤ EMPTY', value: false },
               { name: '¤ CUSTOM', value: 'custom' },
-              new cz.Separator(),
             ]);
           }
 
-          return scopes;
+          return scopes.concat(new cz.Separator());
         },
         when(answers) {
           let hasScope = false;
