@@ -51,7 +51,9 @@ module.exports = {
         type: 'list',
         name: 'type',
         message: messages.type,
-        choices: config.types,
+        choices() {
+          return [].concat(config.types, new cz.Separator());
+        },
       },
       {
         type: 'list',
@@ -69,6 +71,7 @@ module.exports = {
               new cz.Separator(),
               { name: '¤ EMPTY', value: false },
               { name: '¤ CUSTOM', value: 'custom' },
+              new cz.Separator(),
             ]);
           }
 
