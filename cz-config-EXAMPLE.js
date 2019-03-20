@@ -32,6 +32,7 @@ module.exports = {
   isTicketNumberRequired: false,
   ticketNumberPrefix: 'TICKET-',
   ticketNumberRegExp: '\\d{1,5}',
+  ticketNumberPattern: 'Enter the ticket number following this pattern (\\d{1,5})\n',
 
   // it needs to match the value for field type. Eg.: 'fix'
   /*

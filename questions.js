@@ -3,7 +3,7 @@ const log = require('./logger');
 
 const isNotWip = answers => answers.type.toLowerCase() !== 'wip';
 
-function isValidateTicketNo(value, config) {
+const isValidateTicketNo = (value, config) => {
   if (!value) {
     return !config.isTicketNumberRequired;
   }
@@ -14,8 +14,9 @@ function isValidateTicketNo(value, config) {
   if (value.replace(reg, '') !== '') {
     return false;
   }
+
   return true;
-}
+};
 
 module.exports = {
   getQuestions(config, cz) {
@@ -68,6 +69,7 @@ module.exports = {
               { name: 'custom', value: 'custom' },
             ]);
           }
+
           return scopes;
         },
         when(answers) {
@@ -78,11 +80,12 @@ module.exports = {
             hasScope = !!(config.scopes && config.scopes.length > 0);
           }
           if (!hasScope) {
-            // TODO: Fix when possible
             // eslint-disable-next-line no-param-reassign
             answers.scope = 'custom';
+
             return false;
           }
+
           return isNotWip(answers);
         },
       },
@@ -99,7 +102,8 @@ module.exports = {
         name: 'ticketNumber',
         message: messages.ticketNumber,
         when() {
-          return !!config.allowTicketNumber; // no ticket numbers allowed unless specifed
+          // no ticket numbers allowed unless specifed
+          return !!config.allowTicketNumber;
         },
         validate(value) {
           return isValidateTicketNo(value, config);
@@ -114,6 +118,7 @@ module.exports = {
           if (buildHead(answers, config, value).length > limit) {
             return `Exceed limit: ${limit}`;
           }
+
           return true;
         },
         filter(value) {
@@ -134,7 +139,9 @@ module.exports = {
           if (config.allowBreakingChanges && config.allowBreakingChanges.indexOf(answers.type.toLowerCase()) >= 0) {
             return true;
           }
-          return false; // no breaking changes allowed unless specifed
+
+          // no breaking changes allowed unless specifed
+          return false;
         },
       },
       {
@@ -154,6 +161,7 @@ module.exports = {
         message(answers) {
           const SEP = '###--------------------------------------------------------###';
           log.info(`\n${SEP}\n${buildCommit(answers, config)}\n${SEP}\n`);
+
           return messages.confirmCommit;
         },
       },

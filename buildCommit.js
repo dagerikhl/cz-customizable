@@ -1,15 +1,5 @@
 const wrap = require('word-wrap');
 
-function addTicketNumber(ticketNumber, config) {
-  if (!ticketNumber) {
-    return '';
-  }
-  if (config.ticketNumberPrefix) {
-    return `${config.ticketNumberPrefix + ticketNumber.trim()} `;
-  }
-  return `${ticketNumber.trim()} `;
-}
-
 const maxLineWidth = 100;
 
 const wrapOptions = {
@@ -19,48 +9,59 @@ const wrapOptions = {
   width: maxLineWidth,
 };
 
-function addScope(scope) {
-  if (!scope) return ': '; // it could be type === WIP. So there is no scope
+const addScope = scope => {
+  // it could be type === WIP. So there is no scope
+  if (!scope) {
+    return ': ';
+  }
 
   return `(${scope.trim()}): `;
-}
+};
 
-function addSubject(subject) {
-  return subject.trim();
-}
+const addTicketNumber = (ticketNumber, config) => {
+  if (!ticketNumber) {
+    return '';
+  }
+  if (config.ticketNumberPrefix) {
+    return `${config.ticketNumberPrefix + ticketNumber.trim()} `;
+  }
 
-function escapeSpecialChars(result) {
+  return `${ticketNumber.trim()} `;
+};
+
+const addSubject = subject => subject.trim();
+
+const escapeSpecialChars = result => {
   // eslint-disable-next-line no-useless-escape
   const specialChars = ['`'];
 
   let newResult = result;
   // eslint-disable-next-line array-callback-return
-  specialChars.map(item => {
+  specialChars.forEach(item => {
     // If user types "feat: `string`", the commit preview should show "feat: `\string\`".
     // Don't worry. The git log will be "feat: `string`"
     newResult = result.replace(new RegExp(item, 'g'), '\\`');
   });
 
   return newResult;
-}
+};
 
-function buildHead(answers, config, subject = undefined) {
+const buildHead = (answers, config, subject = undefined) => {
   return (
     answers.type +
     addScope(answers.scope) +
     addTicketNumber(answers.ticketNumber, config) +
     addSubject(subject || answers.subject)
   );
-}
+};
 
-function buildCommit(answers, config) {
+const buildCommit = (answers, config) => {
   // Hard limit this line
   const head = buildHead(answers, config).slice(0, maxLineWidth);
 
   // Wrap these lines at 100 characters
   let body = wrap(answers.body, wrapOptions) || '';
   body = body.split('|').join('\n');
-
   const breaking = wrap(answers.breaking, wrapOptions);
   const footer = wrap(answers.footer, wrapOptions);
 
@@ -78,7 +79,7 @@ function buildCommit(answers, config) {
   }
 
   return escapeSpecialChars(result);
-}
+};
 
 module.exports = {
   buildHead,

@@ -3,6 +3,8 @@ declare module "cz-customizable" {
     name: string;
     value?: string;
   }
+
+  // noinspection JSUnusedGlobalSymbols
   export interface Options {
     types: Option[];
     scopes?: Option[];
@@ -24,5 +26,8 @@ declare module "cz-customizable" {
     breakingPrefix?: string;
     footerPrefix?: string;
     subjectLimit?: number;
+    ticketNumberPrefix?: string;
+    ticketNumberRegExp?: string;
+    ticketNumberPattern?: string;
   }
 }
