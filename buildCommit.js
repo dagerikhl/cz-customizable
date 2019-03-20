@@ -71,10 +71,10 @@ const buildCommit = (answers, config) => {
   }
   if (breaking) {
     const breakingPrefix = config && config.breakingPrefix ? config.breakingPrefix : 'BREAKING CHANGE:';
-    result += `\n\n${breakingPrefix}\n${breaking}`;
+    result += `\n\n${breakingPrefix} ${breaking}`;
   }
   if (footer) {
-    const footerPrefix = config && config.footerPrefix ? config.footerPrefix : 'ISSUES CLOSED:';
+    const footerPrefix = config && config.footerPrefix ? config.footerPrefix : 'ISSUES:';
     result += `\n\n${footerPrefix} ${footer}`;
   }
 
