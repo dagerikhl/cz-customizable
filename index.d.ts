@@ -29,5 +29,6 @@ declare module "cz-customizable" {
     ticketNumberPrefix?: string;
     ticketNumberRegExp?: string;
     ticketNumberPattern?: string;
+    addHashtagDuplicateIssues?: boolean;
   }
 }

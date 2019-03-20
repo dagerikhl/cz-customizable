@@ -79,6 +79,7 @@ module.exports = {
 
   breakingPrefix: undefined,
   footerPrefix: 'ISSUES:',
+  addHashtagDuplicateIssues: false,
 
   // skip any questions you want
   skipQuestions: ['body', 'footer'],

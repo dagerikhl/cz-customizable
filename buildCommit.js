@@ -75,7 +75,28 @@ const buildCommit = (answers, config) => {
   }
   if (footer) {
     const footerPrefix = config && config.footerPrefix ? config.footerPrefix : 'ISSUES:';
-    result += `\n\n${footerPrefix} ${footer}`;
+
+    let footerContent = footer;
+    if (config.addHashtagDuplicateIssues) {
+      const keywordRegEx = /(\w+) +(\w+-\d+), (\w+-\d+)/;
+      // Prevent the while loop from getting stuck if it cannot parse the issues correctly
+      let retries = 0;
+      while (keywordRegEx.test(footerContent) && retries < 100) {
+        footerContent = footerContent.replace(keywordRegEx, '$1 $2, $1 $3');
+
+        retries += 1;
+      }
+
+      const duplicateRegEx = /(\w+) +(\w+-\d+)(, [^#]|$)/;
+      retries = 0;
+      while (duplicateRegEx.test(footerContent) && retries < 100) {
+        footerContent = footerContent.replace(duplicateRegEx, '$1 $2, #$2$3');
+
+        retries += 1;
+      }
+    }
+
+    result += `\n\n${footerPrefix} ${footerContent}`;
   }
 
   return escapeSpecialChars(result);
