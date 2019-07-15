@@ -2,12 +2,12 @@ const wrap = require('word-wrap');
 
 const maxLineWidth = 100;
 
-const wrapOptions = {
+const wrapOptions = config => ({
   trim: true,
   newline: '\n',
   indent: '',
-  width: maxLineWidth,
-};
+  width: config.lineLimit || 100,
+});
 
 const addScope = scope => {
   // it could be type === WIP. So there is no scope
@@ -60,10 +60,10 @@ const buildCommit = (answers, config) => {
   const head = buildHead(answers, config).slice(0, maxLineWidth);
 
   // Wrap these lines at 100 characters
-  let body = wrap(answers.body, wrapOptions) || '';
+  let body = wrap(answers.body, wrapOptions(config)) || '';
   body = body.split('|').join('\n');
-  const breaking = wrap(answers.breaking, wrapOptions);
-  const footer = wrap(answers.footer, wrapOptions);
+  const breaking = wrap(answers.breaking, wrapOptions(config));
+  const footer = wrap(answers.footer, wrapOptions(config));
 
   let result = head;
   if (body) {

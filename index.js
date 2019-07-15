@@ -50,9 +50,10 @@ module.exports = {
   prompter(cz, commit) {
     const config = readConfigFile();
     const subjectLimit = config.subjectLimit || 100;
+    const lineLimit = config.lineLimit || 100;
 
     log.info(
-      `\n\nLine 1 will be limited to ${subjectLimit} characters. All other lines will be wrapped after 100 characters.\n`
+      `\n\nLine 1 will be limited to ${subjectLimit} characters. All other lines will be wrapped after ${lineLimit} characters.\n`
     );
 
     const questions = getQuestions(config, cz);

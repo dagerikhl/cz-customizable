@@ -66,8 +66,9 @@ module.exports = {
     fix: [{ name: 'merge' }, { name: 'style' }, { name: 'e2eTest' }, { name: 'unitTest' }],
   },
 
-  // limit subject length
+  // limit line length
   subjectLimit: 100,
+  lineLimit: 100,
 
   allowTicketNumber: false,
   isTicketNumberRequired: false,
